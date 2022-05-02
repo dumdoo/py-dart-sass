@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: dart-sass
+Version: 0.5.0
+Summary: A wrapper around Dart Sass (https://sass-lang.com/dart-sass)
+Home-page: https://github.com/dumdoo/Py-Dart-Sass
+Author: dumdoo
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/dumdoo/Py-Dart-Sass/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.py
+
+UNKNOWN
+
