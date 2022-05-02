@@ -146,7 +146,6 @@ def compile(
             stderr=sp.PIPE,
         )
     elif type(string) == str:
-        print([_dart_sass_path, InputOutput.STDIN, *extra_arguments])
         p = sp.Popen(
             [_dart_sass_path, InputOutput.STDIN, *extra_arguments],
             stdout=sp.PIPE,
