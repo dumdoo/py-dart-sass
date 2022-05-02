@@ -12,9 +12,9 @@ setuptools.setup(
     description="A wrapper around Dart Sass (https://sass-lang.com/dart-sass)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dumdoo/Py-Dart-Sass",
+    url="https://github.com/dumdoo/py-dart-sass",
     project_urls={
-        "Bug Tracker": "https://github.com/dumdoo/Py-Dart-Sass/issues",
+        "Bug Tracker": "https://github.com/dumdoo/py-dart-sass/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3.10",
