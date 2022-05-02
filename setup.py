@@ -25,6 +25,7 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
     ],
+    license="MIT",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     package_data={"dartsass": ["sass/*/*/*", "sass/*/*/src/*"]},
