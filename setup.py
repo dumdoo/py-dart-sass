@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="dart-sass",
-    version="0.5.0",
+    version="0.5.2",
     author="dumdoo",
     description="A wrapper around Dart Sass (https://sass-lang.com/dart-sass)",
     long_description=long_description,

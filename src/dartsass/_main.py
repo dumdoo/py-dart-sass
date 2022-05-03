@@ -115,55 +115,52 @@ def compile(
         extra_arguments.append(OtherOptions.STOP_ON_ERROR)
 
     return_val = None
-
-    if type(dirnames) == str:
-        p = sp.Popen(
-            [_dart_sass_path, dirnames, *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-    elif type(dirnames) == tuple:
-        p = sp.Popen(
-            [_dart_sass_path, *dirnames, *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-    elif type(filenames) == str:
-        p = sp.Popen(
-            [_dart_sass_path, filenames, *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-        return_val = p.stdout.read().decode("utf-8")
-    elif type(filenames) == tuple:
-        p = sp.Popen(
-            [_dart_sass_path, *filenames, *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-    elif type(string) == str:
-        p = sp.Popen(
-            [_dart_sass_path, InputOutput.STDIN, *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-        comm = p.communicate(string.encode("utf-8"))
-        return_val = comm[0].decode("utf-8")
-    elif type(string) == tuple:
-        p = sp.Popen(
-            [_dart_sass_path, InputOutput.STDIN, string[1], *extra_arguments],
-            stdout=sp.PIPE,
-            stdin=sp.PIPE,
-            stderr=sp.PIPE,
-        )
-        comm = p.communicate(string.encode("utf-8"))
-
-    returncode = p.wait()
-    if returncode:
-        raise CompileError(p.communicate()[1].decode("utf-8"))
+    try:
+        if type(dirnames) == str:
+            p = sp.Popen(
+                [_dart_sass_path, dirnames, *extra_arguments],
+                stdout=sp.PIPE,
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+        elif type(dirnames) == tuple:
+            p = sp.check_output(
+                [_dart_sass_path, ':'.join(dirnames), *extra_arguments],
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+        elif type(filenames) == str:
+            p = sp.Popen(
+                [_dart_sass_path, filenames, *extra_arguments],
+                stdout=sp.PIPE,
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+            return_val = p.stdout.read().decode("utf-8")
+        elif type(filenames) == tuple:
+            p = sp.check_output(
+                [_dart_sass_path, *filenames, *extra_arguments],
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+        elif type(string) == str:
+            p = sp.Popen(
+                [_dart_sass_path, InputOutput.STDIN, *extra_arguments],
+                stdout=sp.PIPE,
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+            comm = p.communicate(string.encode("utf-8"))
+            return_val = comm[0].decode("utf-8")
+        elif type(string) == tuple:
+            p = sp.Popen(
+                [_dart_sass_path, InputOutput.STDIN, string[1], *extra_arguments],
+                stdout=sp.PIPE,
+                stdin=sp.PIPE,
+                stderr=sp.PIPE,
+            )
+            comm = p.communicate(string[0].encode("utf-8"))
+    except sp.CalledProcessError as e:
+        raise CompileError(f"{e.returncode} - {e.output.decode('utf-8')}")
+        
     return return_val
